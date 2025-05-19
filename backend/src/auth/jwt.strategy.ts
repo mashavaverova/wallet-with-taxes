@@ -6,6 +6,7 @@ import { Request } from 'express';
 type JwtPayload = {
   id: string;
   email: string;
+  isAdmin: boolean;
 };
 
 @Injectable()
@@ -20,6 +21,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   // eslint-disable-next-line @typescript-eslint/require-await
   async validate(payload: JwtPayload) {
-    return { userId: payload.id, email: payload.email };
+    return {
+      userId: payload.id,
+      email: payload.email,
+      isAdmin: payload.isAdmin,
+    };
   }
 }

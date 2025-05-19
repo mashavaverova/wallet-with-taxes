@@ -37,4 +37,7 @@ export class User {
 
   @Column({ nullable: true })
   onChainWallet: string;
+
+  @Column({ default: false })
+  isAdmin: boolean;
 }

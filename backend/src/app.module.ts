@@ -5,9 +5,10 @@ import { UsersModule } from './users/users.module';
 import { WalletsModule } from './wallets/wallets.module';
 import { MarketplaceModule } from './marketplace/marketplace.module';
 import { TaxModule } from './tax/tax.module';
-import { PaymentsModule } from './payments/payments.module';
-import { AssetsModule } from './assets/assets.module';
-import { EventsModule } from './events/events.module';
+import { PaymentsModule } from './__payments/payments.module';
+import { AssetsModule } from './__assets/assets.module';
+import { EventsModule } from './__events/events.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { EventsModule } from './events/events.module';
     PaymentsModule,
     AssetsModule,
     EventsModule,
+    AdminModule,
   ],
 })
 export class AppModule {}

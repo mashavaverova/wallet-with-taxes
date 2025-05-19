@@ -89,7 +89,7 @@ export class UsersService {
     if (!isPasswordValid) throw new Error('Invalid credentials');
 
     const token = this.jwtService.sign(
-      { id: user.id, email: user.email },
+      { id: user.id, email: user.email, isAdmin: user.isAdmin },
       { expiresIn: '7d' },
     );
 
