@@ -12,6 +12,7 @@ import {
   ContractTransactionResponse,
   ContractTransactionReceipt,
 } from 'ethers';
+import console from 'console';
 
 @Injectable()
 export class UsersService {
@@ -52,6 +53,10 @@ export class UsersService {
       throw new Error('Missing blockchain environment variables');
     }
 
+    console.log('deployerKey:', deployerKey);
+    console.log('RPC URL:', process.env.RPC_URL);
+    console.log('Deployer Key:', process.env.DEPLOYER_PRIVATE_KEY);
+
     const provider = new ethers.JsonRpcProvider(rpcUrl);
     const deployer = new ethers.Wallet(deployerKey, provider);
     const factory = new ethers.Contract(
@@ -82,7 +87,11 @@ export class UsersService {
   }
 
   async login(email: string, password: string) {
+    console.log('Login attempt with:', email, password);
+
     const user = await this.userRepository.findOne({ where: { email } });
+    console.log('Found user:', user);
+
     if (!user) throw new Error('Invalid credentials');
 
     const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
@@ -90,7 +99,10 @@ export class UsersService {
 
     const token = this.jwtService.sign(
       { id: user.id, email: user.email, isAdmin: user.isAdmin },
-      { expiresIn: '7d' },
+      {
+        secret: process.env.JWT_SECRET,
+        expiresIn: '7d',
+      },
     );
 
     return {
@@ -115,5 +127,8 @@ export class UsersService {
 
     await this.userRepository.save(user);
     return { message: 'Wallet linked successfully' };
+  }
+  async findById(id: string) {
+    return this.userRepository.findOne({ where: { id } });
   }
 }

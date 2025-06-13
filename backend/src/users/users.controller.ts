@@ -25,8 +25,9 @@ export class UsersController {
 
   @UseGuards(JwtAuthGuard)
   @Get('me')
-  getProfile(@Req() req: Request) {
-    const user = req.user as { id: string; email: string }; // Add type assertion here
-    return { user };
+  async getProfile(@Req() req: Request) {
+    const jwtUser = req.user as { id: string };
+    const fullUser = await this.usersService.findById(jwtUser.id);
+    return fullUser;
   }
 }

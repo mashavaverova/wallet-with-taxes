@@ -1,0 +1,23 @@
+.dashboard-container {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: #0e0f1a;
+    color: white;
+    min-height: 100vh;
+  }
+  
+  .dashboard-title {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .loading-text {
+    color: #ccc;
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+  }
+  

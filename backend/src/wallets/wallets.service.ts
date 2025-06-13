@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Wallet } from './wallet.entity';
+import { ethers } from 'ethers';
 
 @Injectable()
 export class WalletsService {
@@ -18,11 +19,14 @@ export class WalletsService {
   async getWalletByOwner(owner: string) {
     return this.walletRepo.findOne({ where: { owner } });
   }
-  getBalance(address: string) {
-    // Mocked ETH balance response
+  async getBalance(address: string) {
+    const provider = new ethers.JsonRpcProvider(process.env.RPC_URL);
+    const balanceBigInt = await provider.getBalance(address);
+    const balanceEth = ethers.formatEther(balanceBigInt);
+
     return {
       address,
-      balance: '0.42 ETH',
+      balance: `${balanceEth} ETH`,
     };
   }
   getAssets(address: string) {
@@ -30,8 +34,8 @@ export class WalletsService {
     return {
       address,
       assets: [
-        { name: 'TIX', symbol: 'TIX', balance: 500 },
-        { name: 'USDC', symbol: 'USDC', balance: 1250 },
+        { name: 'TIX_HARDKODED!!!', symbol: 'TIX', balance: 500 },
+        { name: 'USDC_HARDKODED!!!', symbol: 'USDC', balance: 1250 },
       ],
     };
   }

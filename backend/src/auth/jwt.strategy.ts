@@ -12,6 +12,8 @@ type JwtPayload = {
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
+    console.log('JWT_SECRET in JwtStrategy:', process.env.JWT_SECRET);
+
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
@@ -21,8 +23,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   // eslint-disable-next-line @typescript-eslint/require-await
   async validate(payload: JwtPayload) {
+    console.log('JWT validated:', payload);
+
     return {
-      userId: payload.id,
+      id: payload.id,
       email: payload.email,
       isAdmin: payload.isAdmin,
     };

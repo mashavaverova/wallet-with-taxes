@@ -15,11 +15,16 @@ import { TaxService } from '../tax/tax.service';
 
 const MARKETPLACE_ADDRESS = process.env.MARKETPLACE_ADDRESS!;
 const RPC_URL = process.env.RPC_URL!;
-const RELAYER_PK = process.env.RELAYER_PRIVATE_KEY!;
+//const RELAYER_PK = process.env.RELAYER_PRIVATE_KEY!; now its hardcoded as signer from anvil
+
 const FEE_DISTRIBUTOR_ADDRESS = process.env.FEE_DISTRIBUTOR_ADDRESS!;
 
 const provider = new ethers.JsonRpcProvider(RPC_URL);
-const signer = new ethers.Wallet(RELAYER_PK, provider);
+const signer = new ethers.Wallet(
+  '0x2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d409c6',
+  provider,
+);
+
 const marketplaceAbi: ethers.InterfaceAbi =
   marketplaceJson as ethers.InterfaceAbi;
 const erc1155Abi: ethers.InterfaceAbi = erc1155Json as ethers.InterfaceAbi;
