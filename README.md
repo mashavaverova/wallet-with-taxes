@@ -4,6 +4,8 @@ MashaVaverova – Solidity, backend & protocol development.
 
 This a next-generation modular Web3 platform combining NFT-based asset ownership, wallet abstraction, tax compliance, and marketplace infrastructure. 
 This repository contains the full-stack proof of concept (PoC), including smart contracts, a NestJS backend, and a frontend UI.
+Tests exist ONLY FOR MAIN FLOW for now
+Smart contracts part is fully dockumented 
 
 ---
 
@@ -24,21 +26,21 @@ This monorepo supports a modular architecture for production scalability, while 
 
 ## Tech Stack
 
-### Smart Contracts (Solidity) DONE 
+### Smart Contracts (Solidity) DONE AS POC
 - `GenesisWalletFactory`: Deploys upgradeable user wallets
 - `GenesisWallet`: User wallet with ERC-2771 support and restricted modules
 - `Marketplace`: Fixed-price NFT trading with TRI token payments, 5% fee, capped at 100 TRI
 - `FeeDistributor`: Handles protocol fee splitting
 - `ERC1155`: Token standard used for digital assets
 
-### Backend (NestJS) PARTLY DONE
+### Backend (NestJS) DONE AS POC
 - Custodial user registration and wallet creation
 - JWT-based authentication
 - NFT listing and trading via Ethers.js + relayer
 - Tax event logging (acquisition, disposal)
 - PostgreSQL + TypeORM
 
-### Frontend (planned)
+### Frontend (partly done)
 - Connect wallet / login with email
 - View marketplace listings
 - List NFTs and buy assets
